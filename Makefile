@@ -2,6 +2,7 @@
 BUILD_DIR = build
 MCU = atmega328p
 DEVICE_PORT = /dev/ttyUSB0
+FILENAME = $(file)
 
 # Extract the filename without extension
 BASENAME = $(basename $(FILENAME))
@@ -25,7 +26,7 @@ compile: $(BUILD_DIR)/$(BASENAME).hex
 
 # Flash the compiled hex file to the Arduino Nano
 flash: compile
-	avrdude -C /etc/avrdude.conf -p $(MCU) -c arduino -P $DEVICE_PORT -D -U flash:w:$(BUILD_DIR)/$(BASENAME).hex:i
+	avrdude -C /etc/avrdude.conf -p $(MCU) -c arduino -P $(DEVICE_PORT) -D -U flash:w:$(BUILD_DIR)/$(BASENAME).hex:i
 
 # Clean build directory
 clean:

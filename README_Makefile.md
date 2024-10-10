@@ -53,14 +53,14 @@ The `Makefile` automates the following tasks:
 To compile an AVR assembly file into a `.hex` file, run:
 
 ```bash
-make FILENAME=<filename.s> compile
+make file=<filename.s> compile
 ```
 
 - Replace `<filename.s>` with the AVR assembly file you wish to compile. Ensure that the file is located in the same directory as the `Makefile` or provide the relative path.
 
 Example:
 ```bash
-make FILENAME=blink.s compile
+make file=blink.s compile
 ```
 
 This will generate the following files in the `build/` directory:
@@ -73,12 +73,12 @@ This will generate the following files in the `build/` directory:
 To compile and flash the generated `.hex` file to an Arduino Nano (or other AVR microcontroller), run:
 
 ```bash
-make FILENAME=<filename.s> flash
+make flash file=<filename.s>
 ```
 
 Example:
 ```bash
-make FILENAME=blink.s flash
+make flash file=blink.s
 ```
 
 This command will:
@@ -87,7 +87,7 @@ This command will:
 
 > **Note**: The `Makefile` assumes your Arduino is connected to `/dev/ttyUSB0`. If your Arduino is connected to a different port, update the `DEVICE_PORT` variable in the `Makefile` or override it when running the command:
 ```bash
-make FILENAME=blink.s DEVICE_PORT=/dev/ttyUSB1 flash
+make flash file=blink.s DEVICE_PORT=/dev/ttyUSB1
 ```
 
 ### 3. **Clean Build Directory**
@@ -104,11 +104,11 @@ This will delete the `build/` directory and all the files within it.
 
 1. **Compile the assembly file**:
     ```bash
-    make FILENAME=blink.s compile
+    make compile file=blink.s
     ```
 2. **Flash the compiled file to the microcontroller**:
     ```bash
-    make FILENAME=blink.s flash
+    make flash file=blink.s
     ```
 3. **Clean the build directory**:
     ```bash
@@ -133,7 +133,7 @@ DEVICE_PORT = /dev/ttyUSB1
 
 Alternatively, you can override the port when invoking `make`:
 ```bash
-make FILENAME=blink.s DEVICE_PORT=/dev/ttyUSB1 flash
+make flash file=blink.s DEVICE_PORT=/dev/ttyUSB1
 ```
 
 ## Troubleshooting

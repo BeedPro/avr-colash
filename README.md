@@ -81,11 +81,11 @@ This will:
 - Compile the assembly file as explained above.
 - Flash the resulting `.hex` file to the AVR microcontroller using `avrdude`.
 
-> **Note:** The script assumes your Arduino is connected to `/dev/ttyUSB0`. If you are using a different port, modify the port in the `flash` function inside the script:
+> **Note:** The script assumes your Arduino is connected to `/dev/ttyUSB0`. If you are using a different port, modify the `DEVICE_PORT` at the start of the script:
 ```bash
 avrdude -C /etc/avrdude.conf -p $MCU -c arduino -P /dev/ttyUSB0 -D -U flash:w:"$BUILD_DIR/$BASENAME.hex":i
 ```
-Replace `/dev/ttyUSB0` with the correct serial port.
+Replace `/dev/ttyUSB0` with the correct serial port. You can find this using `ls /dev/USB*`
 
 ### 3. **Clean Build Directory**
 
