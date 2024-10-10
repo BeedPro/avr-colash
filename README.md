@@ -44,7 +44,11 @@ This will also install `gcc` on your system.
 
 
 ## Installation
-To install this script you must first clone this repository. To do this run:
+To install this script please run, this will clone this repository to `~/Downloads/avr-colash`:
+```bash
+bash <(curl -s https://raw.githubusercontent.com/BeedPro/avr-colash/main/install.sh)
+```
+If you don't want to install it locally on your system then you can clone this repository by:
 ```bash
 git clone git@github.com:BeedPro/avr-colash.git
 ```
