@@ -3,6 +3,7 @@
 # Variables
 BUILD_DIR="build"
 MCU="atmega328p"
+DEVICE_PORT="/dev/ttyUSB0"
 # This is passed by the user of the file you wish to compile/flash/clean
 FILENAME="$2"
 BASENAME=$(basename "$FILENAME" .s)
@@ -54,7 +55,7 @@ remove_elf_and_o() {
 # Function to flash to Arduino
 flash() {
     echo "Flashing to Arduino Nano..."
-    avrdude -C /etc/avrdude.conf -p $MCU -c arduino -P /dev/ttyUSB0 -D -U flash:w:"$BUILD_DIR/$BASENAME.hex":i
+    avrdude -C /etc/avrdude.conf -p $MCU -c arduino -P $DEVICE_PORT -D -U flash:w:"$BUILD_DIR/$BASENAME.hex":i
     if [ $? -ne 0 ]; then
         echo "Error during flashing."
         exit 1
