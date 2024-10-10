@@ -24,6 +24,13 @@ sudo apt-get install avrdude
 This will also install `gcc` on your system.
 
 
+## Installation
+To install this script you must first clone this repository. To do this run:
+```bash
+git clone git@github.com:BeedPro/avr-colash.git
+```
+You can now just copy the script or/and Makefile to your project directories. Note that if you do copy it instead of installing this script locally, then you must do `./avr-colash` to run the script.
+
 ## Script Overview
 
 This script automates the following tasks:
@@ -47,7 +54,7 @@ The script has three main actions:
 To compile an AVR assembly file into a `.hex` file:
 
 ```bash
-./avr-colash compile <filename.s>
+avr-colash compile <filename.s>
 ```
 
 - `<filename.s>`: The AVR assembly file you want to compile. Make sure the file is in the same directory as the script or provide a relative path.
@@ -55,7 +62,7 @@ To compile an AVR assembly file into a `.hex` file:
 Example:
 
 ```bash
-./avr-colash compile blink.s
+avr-colash compile blink.s
 ```
 
 This will create the following files in the `build/` directory:
@@ -68,13 +75,13 @@ This will create the following files in the `build/` directory:
 To compile and flash the generated `.hex` file to an Arduino Nano (or another AVR microcontroller):
 
 ```bash
-./avr-colash flash <filename.s>
+avr-colash flash <filename.s>
 ```
 
 Example:
 
 ```bash
-./avr-colash flash blink.s
+avr-colash flash blink.s
 ```
 
 This will:
@@ -92,7 +99,7 @@ Replace `/dev/ttyUSB0` with the correct serial port. You can find this using `ls
 To remove all files generated during the compilation process:
 
 ```bash
-./avr-colash clean
+avr-colash clean
 ```
 
 This will delete the `build/` directory and all its contents.
