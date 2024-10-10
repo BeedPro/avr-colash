@@ -2,6 +2,26 @@
 
 This repository provides a `Makefile` to assemble, link, and flash AVR assembly files (specifically for `atmega328p` on the Arduino Nano) using tools such as `avr-as`, `avr-ld`, `avr-objcopy`, and `avrdude`. This `Makefile` simplifies the compilation and flashing process for AVR assembly projects.
 
+## Table of Contents
+- [AVR Make: Build and Flash for AVR on Arduino Nano](#avr-make-build-and-flash-for-avr-on-arduino-nano)
+  - [Using the Bash Script](#using-the-bash-script)
+  - [Prerequisites](#prerequisites)
+  - [Makefile Overview](#makefile-overview)
+    - [Makefile Variables](#makefile-variables)
+    - [Targets](#targets)
+  - [How to Use](#how-to-use)
+    - [1. Compile Only](#1-compile-only)
+    - [2. Compile and Flash to Microcontroller](#2-compile-and-flash-to-microcontroller)
+    - [3. Clean Build Directory](#3-clean-build-directory)
+    - [Example Workflow](#example-workflow)
+  - [Customization](#customization)
+    - [1. Change the Target Microcontroller](#1-change-the-target-microcontroller)
+    - [2. Change the Serial Port for Flashing](#2-change-the-serial-port-for-flashing)
+  - [Troubleshooting](#troubleshooting)
+    - [1. Device Not Found](#1-device-not-found)
+    - [2. Permission Denied on Serial Port](#2-permission-denied-on-serial-port)
+    - [3. Error Handling](#3-error-handling)
+  - [License](#license)
 
 ## Using the Bash Script
 
