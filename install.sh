@@ -5,11 +5,34 @@ AVR_PACKAGES=("gcc-avr" "avr-libc" "avrdude")
 LOCAL_BIN_DIR="$HOME/.local/bin"
 SCRIPT_NAME="avr-colash"
 INSTALL_LOG="/tmp/avr-colash/install.log"
+REPO_URL="https://github.com/BeedPro/avr-colash.git"  # Change to your actual repo URL
+CLONE_DIR="$HOME/Downloads/avr-colash"
 
 # Function to check if a package is installed
 check_package() {
   dpkg -s "$1" &> /dev/null
   return $?
+}
+
+# Function to check if git is installed
+check_git() {
+  if ! command -v git &> /dev/null; then
+    echo "git is not installed. Please install git."
+    exit 1
+  else
+    echo "git is already installed."
+  fi
+}
+
+# Clone the repository into ~/Downloads
+install_repo() {
+  if [ -d "$CLONE_DIR" ]; then
+    echo "Repository already exists in $CLONE_DIR. Pulling latest changes..."
+    cd "$CLONE_DIR" && git pull
+  else
+    echo "Cloning repository to $CLONE_DIR..."
+    git clone "$REPO_URL" "$CLONE_DIR"
+  fi
 }
 
 # Detect the user's shell
@@ -24,6 +47,12 @@ else
   echo "Unknown shell: $USER_SHELL. Exiting."
   exit 1
 fi
+
+# Check if git is installed
+check_git
+
+# Clone the repository to ~/Downloads
+install_repo
 
 # Install necessary AVR tools
 echo "Checking and installing AVR tools..."
