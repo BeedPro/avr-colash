@@ -2,6 +2,25 @@
 
 This repository provides a simple Bash script to assemble, and flash AVR assembly files (specifically for `atmega328p` on the Arduino Nano) using tools such as `avr-as`, `avr-ld`, `avr-objcopy`, and `avrdude`. This repository also provides a if you wish to use `make` instead.
 
+## Table of Contents
+- [AVR-colash: Build and Flash Script for AVR on Arduino Nano](#avr-colash-build-and-flash-script-for-avr-on-arduino-nano)
+  - [Using the Makefile](#using-the-makefile)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+    - [Removing the script locally](#removing-the-script-locally)
+  - [Script Overview](#script-overview)
+    - [Script Logic](#script-logic)
+  - [How to Use](#how-to-use)
+    - [1. Compile Only](#1-compile-only)
+    - [2. Compile and Flash to Microcontroller](#2-compile-and-flash-to-microcontroller)
+    - [3. Clean Build Directory](#3-clean-build-directory)
+  - [Customisation](#customisation)
+    - [1. Change the Target Microcontroller](#1-change-the-target-microcontroller)
+    - [2. Change the Serial Port for Flashing](#2-change-the-serial-port-for-flashing)
+    - [3. Error Handling](#3-error-handling)
+  - [License](#license)
+  - [Troubleshooting](#troubleshooting)
+
 ## Using the Makefile
 
 If you prefer to use `make` for building and flashing AVR assembly files, I've provided a `Makefile` that automates the process. It supports compiling `.s` files, generating `.hex` files, and flashing them to the Arduino Nano.
