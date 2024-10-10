@@ -31,6 +31,19 @@ git clone git@github.com:BeedPro/avr-colash.git
 ```
 You can now just copy the script or/and Makefile to your project directories. Note that if you do copy it instead of installing this script locally, then you must do `./avr-colash` to run the script.
 
+To install it locally:
+```bash
+cd avr-colash
+./install.sh
+```
+### Removing the script locally
+If you wish to remove the script then remove `avr-colash` in `~/.local/bin` or run:
+```
+./uninstall.sh
+```
+which is found in this repository.
+
+
 ## Script Overview
 
 This script automates the following tasks:
