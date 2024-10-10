@@ -5,9 +5,6 @@ MCU = atmega328p
 # Extract the filename without extension
 BASENAME = $(basename $(FILENAME))
 
-# Targets
-all: flash
-
 # Compile assembly to object file
 $(BUILD_DIR)/%.o: %.s
 	@mkdir -p $(BUILD_DIR)

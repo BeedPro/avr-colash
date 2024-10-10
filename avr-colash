@@ -1,0 +1,92 @@
+#!/bin/bash
+
+# Variables
+BUILD_DIR="build"
+MCU="atmega328p"
+# This is passed by the user of the file you wish to compile/flash/clean
+FILENAME="$2"
+BASENAME=$(basename "$FILENAME" .s)
+
+# Create build directory if it doesn't exist
+mkdir -p "$BUILD_DIR"
+
+# Function to assemble
+assemble() {
+    echo "Assembling $FILENAME to object file..."
+    avr-as -g -mmcu=$MCU -o "$BUILD_DIR/$BASENAME.o" "$FILENAME"
+    if [ $? -ne 0 ]; then
+        echo "Error during assembly."
+        exit 1
+    fi
+}
+
+# Function to link object file
+link() {
+    echo "Linking object file to ELF..."
+    avr-ld -o "$BUILD_DIR/$BASENAME.elf" "$BUILD_DIR/$BASENAME.o"
+    if [ $? -ne 0 ]; then
+        echo "Error during linking."
+        exit 1
+    fi
+}
+
+# Function to convert ELF to HEX
+convert_to_hex() {
+    echo "Converting ELF to HEX..."
+    avr-objcopy -O ihex -R .eeprom "$BUILD_DIR/$BASENAME.elf" "$BUILD_DIR/$BASENAME.hex"
+    if [ $? -ne 0 ]; then
+        echo "Error during HEX conversion."
+        exit 1
+    fi
+}
+
+# Function to remove ELF and Object files from build
+remove_elf_and_o() {
+    echo "Removing ELF and Object file..."
+    rm "$BUILD_DIR/$BASENAME.elf"
+    rm "$BUILD_DIR/$BASENAME.o"
+    if [ $? -ne 0 ]; then
+        echo "Error during removal conversion."
+        exit 1
+    fi
+}
+
+# Function to flash to Arduino
+flash() {
+    echo "Flashing to Arduino Nano..."
+    avrdude -C /etc/avrdude.conf -p $MCU -c arduino -P /dev/ttyUSB0 -D -U flash:w:"$BUILD_DIR/$BASENAME.hex":i
+    if [ $? -ne 0 ]; then
+        echo "Error during flashing."
+        exit 1
+    fi
+}
+
+# Function to clean build directory
+clean() {
+    echo "Cleaning build directory..."
+    rm -rf "$BUILD_DIR"
+}
+
+# Main logic
+case "$1" in
+    compile)
+        assemble
+        link
+        convert_to_hex
+        remove_elf_and_o
+        echo "Compilation complete: $BUILD_DIR/$BASENAME.hex"
+        ;;
+    flash)
+        assemble
+        link
+        convert_to_hex
+        remove_elf_and_o
+        flash
+        ;;
+    clean)
+        clean
+        ;;
+    *)
+        echo "Usage: $0 {compile|flash|clean} <filename.s>"
+        ;;
+esac
