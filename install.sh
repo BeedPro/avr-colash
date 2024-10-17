@@ -76,6 +76,7 @@ if [[ ":$PATH:" != *":$LOCAL_BIN_DIR:"* ]]; then
   echo "Adding $LOCAL_BIN_DIR to your PATH in $CONFIG_FILE..."
   echo 'export PATH="$HOME/.local/bin:$PATH"' >> "$CONFIG_FILE"
   echo "Please restart your terminal or run 'source $CONFIG_FILE' to apply the changes."
+  source $CONFIG_FILE
 fi
 
 # Copy the avr-colash script to ~/bin and make it executable
