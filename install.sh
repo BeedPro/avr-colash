@@ -80,7 +80,7 @@ fi
 
 # Copy the avr-colash script to ~/bin and make it executable
 echo "Installing $SCRIPT_NAME to $LOCAL_BIN_DIR..."
-cp "$SCRIPT_NAME" "$LOCAL_BIN_DIR/"
+cp "$CLONE_DIR/$SCRIPT_NAME" "$LOCAL_BIN_DIR/"
 chmod +x "$LOCAL_BIN_DIR/$SCRIPT_NAME"
 
 # Finish
